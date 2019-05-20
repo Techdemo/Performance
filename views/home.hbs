@@ -1,0 +1,25 @@
+{{#each categories}}
+<div class="uk-child-width-1-2@m" uk-grid>
+    <div>
+        <div class="uk-card uk-card-default">
+            <div class="uk-card-media-top">
+                <img class="uk-align-center js-lazy-image" src="{{ this.img }}" alt="">
+            </div>
+            <div class="uk-card-body">
+                <h3 class="uk-card-title">{{ this.cat }}</h3>
+                <ul uk-accordion>
+                    <li>
+                        <a class="uk-accordion-title" href="#">Description</a>
+                        <div class="uk-accordion-content">
+                            <p>{{ this.descrip }}</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+                <div class="uk-card-footer">
+                    <a href="/{{ this.cat }}" class="uk-button uk-button-text">See all {{ this.cat }} recipes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/each}}

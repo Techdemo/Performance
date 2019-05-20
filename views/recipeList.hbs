@@ -1,0 +1,18 @@
+<h2> showing all recipes in the category of {{ title }} </h2>
+{{#each categories}}
+<div class="uk-child-width-1-2@m" uk-grid>
+    <div>
+        <div class="uk-card uk-card-default">
+            <div class="uk-card-media-top">
+                <img class="uk-align-center js-lazy-image" src="{{ this.strMealThumb }}" alt="">
+            </div>
+            <div class="uk-card-body">
+                <h3 class="uk-card-title">{{ this.strMeal }}</h3>
+            </div>
+            <div class="uk-card-footer">
+                <a href="/recipe/{{ this.strMeal }}" class="uk-button uk-button-text">See {{ this.strMeal }} recipe</a>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}

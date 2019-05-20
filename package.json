@@ -1,0 +1,29 @@
+{
+  "name": "performanceresit",
+  "version": "1.0.0",
+  "description": "a resit assignment for the course \"Performance Matters\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Marcel Fleuren",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "compression": "^1.7.4",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.2",
+    "hbs": "^4.0.4",
+    "shrink-ray-current": "^4.0.0"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-rev": "^9.0.0",
+    "gulp-uglify": "^3.0.2",
+    "nodemon": "^1.19.0"
+  }
+}
