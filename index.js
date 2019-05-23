@@ -51,8 +51,14 @@ const recipeDetail = require('./routes/recipe');
 
 // routes
 app.get('/', indexRouter)
+app.get('/offline', (req, res) => {
+    res.render('offline', {
+        layout: 'default'
+    });
+})
 app.get('/:cat', catList)
 app.get('/recipe/:id', recipeDetail)
+
 
 
 // server listening to port

@@ -1,4 +1,4 @@
-const cacheName = 'v5';
+const cacheName = 'v6';
 
 const cacheAssets = [
     '/',
@@ -43,5 +43,17 @@ self.addEventListener('activate', e => {
 // Call Fetch Event
 self.addEventListener('fetch', e => {
     console.log('Service Worker: Fetching');
-    e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
+    e.respondWith(
+        caches
+        .match(e.request)
+        .then(response => {
+            if(response){
+                return response
+            }
+            return fetch(e.request)
+            .catch(()=> caches.match('/offline'))
+        })
+    )
+        // fetch(e.request)
+        // .catch(() => caches.match(e.request)));
 });
