@@ -43,7 +43,6 @@ app.engine( 'hbs', hbs( {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
 // import routes
 const indexRouter = require('./routes/index');
 const catList = require('./routes/catList');
@@ -58,8 +57,6 @@ app.get('/offline', (req, res) => {
 })
 app.get('/:cat', catList)
 app.get('/recipe/:id', recipeDetail)
-
-
 
 // server listening to port
 const server = app.listen(process.env.PORT || 3000, _ => {
