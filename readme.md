@@ -8,22 +8,23 @@
 
 ## Table of contents
 
-- install
-- Prototype
-  - SSR
-- Performance
-  - [x] Gulp
-  - [x] minify css
-  - [x] minify js
-  - [x] Compression
-  - [x] EXPERIMENT: Intersection observer (lazy loading)
-  - [x] Caching
-  - [x] File revisioning
-  - [x] Service worker
-  - [ ] offline content
-  - [X] Manifest
-  - [ ] Deployment on Heroku
-- Conclusion
+- [install](#install)
+- [prototype](#prototype)
+  - [ssr](#ssr)
+  - [uikit](#uikit)
+  - [api](#api)
+- [performance](#performance)
+  - [first view optimisation](#first-view-optimasition)
+  - [gulp](#gulp)
+  - [minify css](#minify-css)
+  - [minify js](#minify-js)
+- [compression](#compression)
+- [intersection observer][#EXPERIMENT:-Intersection-Observer-Api]
+- [Caching - Repeat view optimizations](#Caching - Repeat view optimizations)
+- [revisioning](#revisioning)
+- [service worker](#service-worker)
+- [offline](#offline)
+- [manifest](#manifest)
 
 ## Install
 
@@ -61,6 +62,10 @@ The recipes come from a public https api called [The meal db](https://www.themea
 
 ## Performance
 
+### First view optimisation
+
+
+
 ![screen1](assets/screen1.png)
 
 
@@ -70,8 +75,15 @@ The recipes come from a public https api called [The meal db](https://www.themea
 The goal is to optimize the following:
 
 - *first meaningful paint*
+  - for the first view I've used compression and minification to reduce the sizes of the files that need to be downloaded. 
+  - When the user has cached the assets such as images, the first meaningful pain is then again shorter. The imported images get loaded from the cache. 
+  - optimising the critical render path. By reducing the size of the render blocking items. Later caching them
+  - offline caching strategy
 - *first contentful paint*
+  - writing the app to server side rendering. I update only the content, not the whole page. 
+  - Minimising and compressing the number of render blocking items. Although I had only one css file, compressing it reduced it download time. 
 - *time to interactive*
+  - compressing and minifying the Javascript of this app has a positive effect on the time to interactive. 
 
 All of the audits are done on mobile view, using a slow 3g connection with the chrome developer tools.
 This is the starting point.
@@ -187,8 +199,6 @@ An experiment once in a while can make an assignment extra interesting from time
 
 **This works great! But one important point; when javascript is turned off, the img won't load because of the Fade animation in css. **
 
-TODO: Write an explaination about the workings of this api and how you managed to make this work.
-
 The results of implementing the Intersection Observer api for lazy loading of images where questionable.
 
 the pros:
@@ -207,7 +217,7 @@ The cons:
 
 Just to be sure, I removed the intersection observer code from the final product.
 
-### Caching
+### Caching - Repeat view optimizations
 
 I implemented caching by setting the cache-control headers as a middleware.
 
@@ -244,14 +254,17 @@ This outputs the file `rev-manifest.json`
 
 ### Service worker
 
-TODO:
+The service worker I have installed caches all the static files and the root. So that every page that te user has visited gets added to the cache. The recipes that the user already visited gets added to the cache so it can be viewed offline. This greatly reduces load times for repeat views and is a great fallback for when something goes wrong with either the server or the client side cache. So a cache first strategy. 
 
-- check the validity of the service worker
-- type some explainaition about the workings of the service worker
+When the visitor is offline and doesn't have the recipes or page cached, the sites redirects the user to the offline path. 
 
-### Offline content
+![offline](assets/offline.png)
 
 ### Manifest file
+
+The manifest file is a json file that gives the browser information about your webapp and how it should behave when installed. 
+
+A typical manifest file includes information about the app `name`, `icons` it should use, the `start_url` it should start at when launched, and more.
 
 
 
